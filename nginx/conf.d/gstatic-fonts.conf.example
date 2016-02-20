@@ -1,0 +1,58 @@
+server {
+    listen 80;
+    listen 443 ssl;
+    
+    server_name fonts.penbeat.cn;
+
+    ssl_certificate     ssl/fonts.penbeat.cn.crt;
+    ssl_certificate_key ssl/fonts.penbeat.cn.key;
+
+    location /css {
+        sub_filter 'fonts.gstatic.com' 'fonts.penbeat.cn';
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Accept-Encoding '';
+        proxy_redirect off;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_pass https://fonts.googleapis.com;
+        proxy_cache STATIC;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+
+    location /icon {
+        sub_filter 'fonts.gstatic.com' 'fonts.penbeat.cn';
+        sub_filter_once off;
+        sub_filter_types text/css;
+        proxy_pass_header Server;
+        proxy_set_header Accept-Encoding '';
+        proxy_redirect off;
+        proxy_set_header Host fonts.googleapis.com;
+        proxy_pass https://fonts.googleapis.com;
+        proxy_cache STATIC;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+    
+    location /avatar/ {
+        proxy_pass_header Server;
+        proxy_set_header Host secure.gravatar.com;
+        proxy_set_header Accept-Encoding '';
+        proxy_redirect off;
+        proxy_pass https://secure.gravatar.com;
+    }
+
+    location / {
+        proxy_pass_header Server;
+        proxy_redirect off;
+        proxy_set_header Host fonts.gstatic.com;
+        proxy_pass https://fonts.gstatic.com;
+        proxy_cache STATIC;
+        proxy_cache_valid  200 304 365d;
+        proxy_cache_key $host$uri$is_args$args;
+        expires max;
+    }
+ }
