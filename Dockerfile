@@ -1,7 +1,7 @@
 FROM debian:jessie
 
-ENV NGINX_VERSION 1.9.12
-ENV OPENSSL_VERSION 1.0.2g
+ENV NGINX_VERSION 1.10.1
+ENV OPENSSL_VERSION 1.0.2h
 ENV ZLIB_VERSION 1.2.8
 ENV PCRE_VERSION 8.38
 
@@ -59,8 +59,6 @@ RUN apt-get update && apt-get install -y build-essential \
  --with-mail_ssl_module \
  --with-file-aio \
  --with-http_v2_module \
- --with-cc-opt='-g -O2 -fstack-protector-strong -Wformat -Werror=format-security -Wp,-D_FORTIFY_SOURCE=2' \
- --with-ld-opt='-Wl,-z,relro -Wl,--as-needed' \
  --with-ipv6 \
  --add-module=../ngx_http_google_filter_module \
  --add-module=../ngx_http_substitutions_filter_module \
