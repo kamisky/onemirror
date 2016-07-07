@@ -4,8 +4,8 @@ OneMirror is a Docker image of Nginx. With already configured Google Search, Goo
 
 ## Info
 
- - Build parameters is from the offical Debian package
- - Latest mainline version Nginx
+ - Build parameters are from the offical Debian package
+ - Latest stable version Nginx
  - Latest stable OpenSSL
  - Google Search mirror module `ngx_http_google_filter_module` added
  - With Google Search, Google Fonts and Gravatar proxy configuration example
